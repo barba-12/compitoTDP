@@ -2,6 +2,12 @@ const http = require("http");
 const fs = require("fs");
 const querystring = require("querystring");
 
+const utenti = {
+  "utente1": "1234",
+  "utente2": "123",
+  "admin": "admin"
+}
+
 const server = http.createServer((request, response) => {
     if (request.url === "/" && request.method === "GET") {
         fs.readFile("index.html", (err, data) => {
@@ -26,7 +32,7 @@ const server = http.createServer((request, response) => {
             const parsedBody = querystring.parse(body);
             const username = parsedBody.username || "ospite";
 
-            if(username == "admin" && parsedBody.password == "123"){
+            if(checkUtenti(username, parsedBody.password)){
               // Crea l'HTML dinamico con lo username
               const paginaHtml = `
                   <!DOCTYPE html>
@@ -54,6 +60,14 @@ const server = http.createServer((request, response) => {
         response.end("Pagina non trovata");
     }
 });
+
+function checkUtenti(username, passoword) {
+  for (const usename in utenti) {
+    const ps = utenti[usename];
+    if(username == usename && passoword == ps) return true;
+  }
+  return false;
+};
 
 server.listen(3000, () => {
     console.log("Server in ascolto sulla porta 3000");
