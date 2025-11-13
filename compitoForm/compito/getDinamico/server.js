@@ -89,6 +89,22 @@ function requestHandler(request,response) {
                     <input class="form-control" id="exampleFormControlInput1" value="${oggettourl.query.email}" name="email" placeholder="email@example.com">
                 </div>`;
             }
+            
+            //data
+            const dataInserita = oggettourl.query.date || "";
+            if (dataInserita === ""){
+                messaggio += `
+                <div class="form-group" style="margin: 3% 25%;">
+                    <input class="form-control" type="date" name="date">
+                    <div style="margin-top: 1%;" class="alert alert-warning" role="alert">inserire una data</div>
+                </div>`
+            } else {
+                messaggio += `
+                <div class="form-group" style="margin: 3% 25%;">
+                    <input class="form-control" type="date" value="${oggettourl.query.date}" name="date">
+                </div>`
+            }
+
 
             //gender
             if (!oggettourl.query.gender) {
@@ -237,10 +253,56 @@ function requestHandler(request,response) {
                 response.write(messaggio);
                 response.end();
             } else {
-                // No errors, form is valid
-                response.writeHead(200, {'Content-Type': 'text/plain'});
-                response.write('Form compilato in modo corretto');
-                response.end();
+                // Tutti i campi validi — mostriamo la pagina di riepilogo
+                const dati = oggettourl.query;
+
+                // Normalizzo i checkbox patente (array o singolo valore)
+                let patenti = [];
+                if (dati.patente) {
+                    patenti = Array.isArray(dati.patente) ? dati.patente : [dati.patente];
+                }
+
+                // Scuole leggibili
+                const scuole = {
+                    "1": "Istituto tecnico",
+                    "2": "Liceo",
+                    "3": "Istituto professionale"
+                };
+                const scuolaLabel = scuole[dati.scuola] || "Nessuna selezionata";
+
+                // HTML di riepilogo
+                const recapPage = `
+                <!DOCTYPE html>
+                <html lang="it">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+                    <title>Riepilogo Dati</title>
+                </head>
+                <body style="margin: 2% 20%;">
+                    <div class="card shadow p-4">
+                        <h2 class="text-center mb-4">Riepilogo Dati Inseriti</h2>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Nome:</strong> ${dati.name}</li>
+                            <li class="list-group-item"><strong>Cognome:</strong> ${dati.surname}</li>
+                            <li class="list-group-item"><strong>Email:</strong> ${dati.email}</li>
+                            <li class="list-group-item"><strong>Data:</strong> ${dati.date}</li>
+                            <li class="list-group-item"><strong>Genere:</strong> ${dati.gender}</li>
+                            <li class="list-group-item"><strong>Patenti:</strong> ${patenti.join(", ") || "Nessuna"}</li>
+                            <li class="list-group-item"><strong>Scuola:</strong> ${scuolaLabel}</li>
+                            <li class="list-group-item"><strong>Commenti:</strong> ${dati.commenti || "Nessuno"}</li>
+                        </ul>
+                        <div class="mt-4 text-center">
+                            <a href="/" class="btn btn-primary">Torna alla home</a>
+                        </div>
+                    </div>
+                </body>
+                </html>
+                `;
+
+                response.writeHead(200, {'Content-Type': 'text/html'});
+                response.end(recapPage);
             }
             break;
         default:
