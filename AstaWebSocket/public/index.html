@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Asta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="px-5 position-absolute top-0 start-50 translate-middle-x border">
+    <h1 id="nome"></h1>
+    <p id="descrizione"></p>
+
+    <h2>Offerta corrente: € <span id="offerta">0</span></h2>
+
+    <div class="input-group mb-3">
+        <input type="number" class="form-control" id="puntata" placeholder="Puntata">
+        <button type="button" class="btn btn-success" id="btnInvia">Success</button>
+    </div>
+
+    <div class="alert alert-warning" role="alert" id="errore" style="display: none;"></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    const nome = document.getElementById("nome");
+    const descrizione = document.getElementById("descrizione");
+    const offerta = document.getElementById("offerta");
+    const errore = document.getElementById("errore");
+    const puntata = document.getElementById("puntata");
+
+    socket.on("datiIniziali", (data) => {
+        nome.innerText = data.oggetto.nome;
+        descrizione.innerText = data.oggetto.descrizione;
+        offerta.innerText = data.offerta;
+    });
+
+    socket.on("aggiornaOfferta", (nuovaOfferta) => {
+        offerta.innerText = nuovaOfferta;
+        errore.innerText = "";
+        errore.style.display = "none";
+    });
+
+    socket.on("errore", (msg) => {
+        errore.style.display = "block";
+        errore.innerText = msg;
+    });
+
+    document.getElementById("btnInvia").addEventListener("click", function () {
+        socket.emit("nuovaOfferta", puntata.value);
+        puntata.value = "";
+    })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
