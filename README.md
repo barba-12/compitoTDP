@@ -1,2 +1,10 @@
-npm install per installare i pacchetti usati elencati in package.json
-node server.js per avviare il server
+# Asta Real-time
+
+Avvia il server con:
+
+npm install  
+node server.js
+
+Apri il browser su:
+
+http://localhost:3000
