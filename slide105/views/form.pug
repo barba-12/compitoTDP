@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 #{title}
+    form(action="/salva" method="POST")
+      label Nome:
+      input(type="text" name="nome")
+      br
+      label Cognome:
+      input(type="text" name="cognome")
+      br
+      button(type="submit") Invia
