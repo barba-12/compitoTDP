@@ -1,5 +1,0 @@
-Modifica
-l’esercizio precedente (slide 104)inviando al client che si connette un form
-con un campo nome e un campo cognome poi nella 
-successiva connessione del client rispondi con un messaggio di saluto
-che specifica il nome e il cognome

@@ -1,0 +1,13 @@
+<!ELEMENT catalogo (scuola, libro+)>
+<!ELEMENT scuola (#PCDATA)>
+<!ELEMENT libro (titolo, autore, anno, editore, genere?, copieDisponibili)>
+<!ATTLIST libro isbn ID #REQUIRED>
+
+<!ELEMENT titolo (#PCDATA)>
+<!ELEMENT autore (#PCDATA)>
+<!ATTLIST autore nazionalita CDATA #IMPLIED>
+
+<!ELEMENT anno (#PCDATA)>
+<!ELEMENT editore (#PCDATA)>
+<!ELEMENT genere (#PCDATA)>
+<!ELEMENT copieDisponibili (#PCDATA)>

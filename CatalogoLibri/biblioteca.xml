@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="biblioteca.xsl"?>
+<!DOCTYPE catalogo SYSTEM "biblioteca.dtd">
+<catalogo>
+    <scuola>Liceo Scientifico "G. Marconi"</scuola>
+    
+    <libro isbn="ISBN-001">
+        <titolo>Il nome della rosa</titolo>
+        <autore nazionalita="italiana">Umberto Eco</autore>
+        <anno>1980</anno>
+        <editore>Bompiani</editore>
+        <genere>Giallo storico</genere>
+        <copieDisponibili>5</copieDisponibili>
+    </libro>
+
+    <libro isbn="ISBN-002">
+        <titolo>1984</titolo>
+        <autore nazionalita="inglese">George Orwell</autore>
+        <anno>1949</anno>
+        <editore>Mondadori</editore>
+        <copieDisponibili>3</copieDisponibili>
+    </libro>
+
+    <libro isbn="ISBN-003">
+        <titolo>Il Piccolo Principe</titolo>
+        <autore>Antoine de Saint-Exupéry</autore>
+        <anno>1943</anno>
+        <editore>Gallimard</editore>
+        <genere>Fiaba</genere>
+        <copieDisponibili>10</copieDisponibili>
+    </libro>
+</catalogo>
