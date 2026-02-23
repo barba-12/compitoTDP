@@ -1,0 +1,12 @@
+nav.navbar
+  .nav-container
+    a.logo(href="/") Emporium
+    ul.nav-links
+      li: a(href="/") Home
+      li: a(href="/prodotti") Prodotti
+      li: a(href="/contatti") Contatti
+    .user-info
+      if utente
+        span Ciao, #{utente}
+      else
+        span Benvenuto, Ospite

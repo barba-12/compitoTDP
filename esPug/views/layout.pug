@@ -1,0 +1,15 @@
+doctype html
+html(lang="it")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= titoloPagina || "Il Mio Negozio"
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    include navbar.pug
+    
+    main#main-wrapper
+      block content
+
+    footer
+      p © 2024 #{titoloPagina} - Tutti i diritti riservati.

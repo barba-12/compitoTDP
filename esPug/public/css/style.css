@@ -1,0 +1,178 @@
+/* --- Centratura del contenuto principale --- */
+#main-wrapper {
+    max-width: 1100px;
+    margin: 40px auto; /* Centra orizzontalmente con margine sopra/sotto */
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Layout della griglia prodotti --- */
+.prodotti-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* --- Stile Base della Card --- */
+.card {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* --- Stile Dinamico .promo (Classe applicata da Pug) --- */
+.card.promo {
+    border: 2px solid #ff9800; /* Bordo Arancione */
+    background-color: #fffaf0; /* Sfondo leggermente ambrato */
+    position: relative;
+}
+
+.card.promo::before {
+    content: "OFFERTA SPECIALE";
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    background-color: #ff9800;
+    color: white;
+    padding: 2px 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* --- Badge Sconto --- */
+.badge-sconto {
+    color: #e67e22;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+/* --- Stile per prodotti Esauriti --- */
+.esaurito {
+    color: #95a5a6;
+    background-color: #f2f2f2;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    text-align: center;
+    border: 1px dashed #bdc3c7;
+    margin-top: auto;
+}
+
+/* --- Pulsante Acquisto --- */
+.btn-acquista {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: auto;
+    transition: background 0.3s;
+}
+
+.btn-acquista:hover {
+    background-color: #219150;
+}
+
+/* --- Navbar (Stile extra per coerenza) --- */
+.navbar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 0;
+}
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* --- Stile della Navbar --- */
+.navbar {
+    background-color: #2c3e50; /* Blu scuro elegante */
+    color: white;
+    padding: 0.8rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between; /* Separa Logo, Link e User */
+    align-items: center;
+}
+
+/* --- Logo --- */
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3498db; /* Azzurro */
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+/* --- Link di Navigazione --- */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* --- Info Utente --- */
+.user-info {
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-info b, .user-info strong {
+    color: #f1c40f; /* Giallo per evidenziare il nome */
+}
+
+/* --- Stile del Footer --- */
+footer {
+    color: #bdc3c7;            /* Grigio chiaro per il testo */
+    text-align: center;        /* Centra il testo */
+    padding: 20px 0;           /* Spazio interno sopra e sotto */
+    margin-top: 50px;          /* Spazio sopra il footer per staccarlo dal contenuto */
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
