@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //rotta prodotti
 app.get('/prodotti', (req, res) => {
     const data = {
-        titoloPagina: "Tech & Style Emporium",
+        titoloPagina: "Tech Shop",
         utente: "Mario Rossi",
         listaProdotti: [
             { 
@@ -46,7 +46,7 @@ app.get('/prodotti', (req, res) => {
 // Rotta Home
 app.get('/', (req, res) => {
     res.render('index', { 
-        titoloPagina: "Home - Tech Emporium", 
+        titoloPagina: "Home - Tech Shop", 
         utente: "Mario Rossi" 
     });
 });
