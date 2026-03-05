@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    title Green Mobility - Sottoscrivi
+    style.
+      body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; display: flex; justify-content: center; padding: 40px; }
+      .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+      h1 { color: #2e7d32; text-align: center; }
+      .form-group { margin-bottom: 15px; }
+      label { display: block; margin-bottom: 5px; font-weight: bold; }
+      input[type="text"], input[type="date"], select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+      .checkbox-group { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+      button { width: 100%; background-color: #2e7d32; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+      button:hover { background-color: #1b5e20; }
+  body
+    .container
+      h1 🌱 Green Mobility
+      p Registra il tuo abbonamento ecologico.
+      
+      form(action="/sottoscrivi" method="POST")
+        .form-group
+          label(for="nome") Nome e Cognome
+          input(type="text" id="nome" name="nome" minlength="2" pattern="^[A-Za-zÀ-ÿ ]+$" placeholder="Es: Mario Rossi")
+        
+        .form-group
+          label(for="dataNascita") Data di Nascita
+          input(type="date" id="dataNascita" name="dataNascita")
+        
+        .form-group
+          label(for="tipo") Tipo Abbonamento
+          select(id="tipo" name="tipo")
+            option(value="Mensile") Mensile (40€)
+            option(value="Trimestrale") Trimestrale (100€)
+            option(value="Annuale") Annuale (350€)
+            
+        .form-group
+          label(for="zona") Zona di Copertura
+          select(id="zona" name="zona")
+            option(value="Urbana") Urbana
+            option(value="Extra-urbana") Extra-urbana (+20%)
+            
+        .checkbox-group
+          input(type="checkbox" id="studente" name="studente")
+          label(for="studente") Sono uno studente (-25% sconto)
+          
+        .checkbox-group
+          input(type="checkbox" id="privacy" name="privacy")
+          label(for="privacy") Accetto l'informativa sulla privacy (obbligatorio)
+          
+        button(type="submit") Calcola Preventivo e Salva

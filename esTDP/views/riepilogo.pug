@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Riepilogo Abbonamento
+    style.
+      body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+      .card { border: 1px solid #27ae60; padding: 20px; border-radius: 8px; }
+      .auguri { color: #e67e22; font-weight: bold; }
+  body
+    h1 Conferma Sottoscrizione
+    .card
+      if isCompleanno
+        p.auguri Buon compleanno! Green Mobility ti fa gli auguri
+      
+      p Titolare: #{abbonamento.nome} (#{eta} anni)
+      p Piano: #{abbonamento.tipo} - #{abbonamento.zona}
+      p Prezzo Finale: #{abbonamento.prezzo}€
+      
+    a(href="/dashboard") Vai alla Dashboard Statistiche
