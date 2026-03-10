@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "nome": "riki barba",
+    "dataNascita": "2007-12-12",
+    "tipo": "Annuale",
+    "zona": "Extra-urbana",
+    "studente": true,
+    "pagamento": "carta",
+    "prezzo": "315.00",
+    "dataCreazione": "2026-03-10T15:17:08.469Z"
+  },
+  {
+    "id": "2",
+    "nome": "rikia bara",
+    "dataNascita": "2007-12-12",
+    "tipo": "Mensile",
+    "zona": "Extra-urbana",
+    "studente": false,
+    "pagamento": "carta",
+    "prezzo": "48.00",
+    "dataCreazione": "2026-03-10T15:27:01.952Z"
+  }
+]

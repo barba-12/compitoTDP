@@ -1,0 +1,112 @@
+PUG
+{
+form(action="/submit" method="POST")
+  //- Testo standard
+  .group
+    label(for="username") Nome Utente:
+    input(type="text" id="username" name="username" placeholder="min 3 caratteri")
+
+  //- Email
+  .group
+    label(for="email") Email:
+    input(type="email" id="email" name="email")
+
+  //- Password
+  .group
+    label(for="password") Password:
+    input(type="password" id="password" name="password")
+
+  //- Numero (es. Età)
+  .group
+    label(for="eta") Età:
+    input(type="number" id="eta" name="eta" min="18" max="99")
+
+  //- Menu a tendina (Select)
+  .group
+    label(for="ruolo") Ruolo:
+    select(id="ruolo" name="ruolo")
+      option(value="user") Utente
+      option(value="admin") Amministratore
+
+  //- Radio Buttons (Scelta singola - STESSO NAME)
+  .group
+    p Genere:
+    input(type="radio" id="m" name="genere" value="M")
+    label(for="m") Maschio
+    input(type="radio" id="f" name="genere" value="F")
+    label(for="f") Femmina
+
+  //- Checkbox (Scelta multipla o booleana)
+  .group
+    input(type="checkbox" id="newsletter" name="newsletter")
+    label(for="newsletter") Iscriviti alla newsletter
+
+  button(type="submit") Invia Dati
+}
+
+RAGEX
+{
+    Solo Lettere	/^[A-Za-z ]+$/	Accetta solo lettere e spazi.
+    Alfanumerico	/^[A-Za-z0-9]+$/	Lettere e numeri, no simboli.
+    Email	/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/	Struttura classica nome@dominio.it.
+    Password Forte	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/	Min 8 caratteri, una maiuscola, una minuscola, un numero.
+    Codice Fiscale	/^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/	Formato standard italiano.
+    Data (DD/MM/YYYY)	/^\d{2}\/\d{2}\/\d{4}$/	Controlla solo il formato numerico.
+    Telefono	/^\+?[0-9]{8,15}$/	Opzionale "+" e da 8 a 15 cifre.
+}
+
+NODE
+{
+    app.post('/submit', (req, res) => {
+        // 1. Recupero dati
+        const { username, email, password, eta, genere, newsletter } = req.body;
+
+        // 2. Validazione Esistenza (Obbligatori)
+        if (!username || !email || !password) {
+            return res.status(400).send("Campi obbligatori mancanti");
+        }
+
+        // 3. Validazione con Regex
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).send("Email non valida");
+        }
+
+        // 4. Validazione Numerica e Logica
+        const etaNum = parseInt(eta);
+        if (isNaN(etaNum) || etaNum < 18) {
+            return res.status(400).send("Devi essere maggiorenne");
+        }
+
+        // 5. Validazione Radio (Whitelist)
+        const generiValidi = ['M', 'F'];
+        if (!generiValidi.includes(genere)) {
+            return res.status(400).send("Genere non valido");
+        }
+
+        // 6. Gestione Checkbox (Booleano)
+        const vuoleNewsletter = newsletter === 'on'; // Le checkbox inviano 'on' se selezionate
+
+        // Se tutto è OK, procedi al salvataggio...
+        console.log("Dati validati con successo!");
+    });
+}
+
+DATE
+{
+    d.getFullYear()	2026	L'anno a 4 cifre
+    d.getMonth()	2	Attenzione: 0=Gen, 1=Feb, 2=Mar...
+    d.getDate()	10	Il giorno del mese (1-31)
+    d.getDay()	2	Giorno della settimana (0=Dom, 1=Lun...)
+    d.getHours()	16	Ore (0-23)
+    d.getTime()	174162...	Timestamp in millisecondi
+
+    CONFRONTO: d1.getTime() < d2.getTime()
+
+    CALCOLARE LIMITE ETA': 
+        const limite = new Date();
+        limite.setFullYear(oggi.getFullYear() - 18);
+        if (dataInserita > limite) {
+            return res.status(400).send("Devi essere maggiorenne");
+        }
+}

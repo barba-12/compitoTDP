@@ -18,12 +18,29 @@ app.get('/', (req, res) => {
 });
 
 app.post('/sottoscrivi', (req, res) => {
-    const { nome, dataNascita, tipo, zona, studente, privacy } = req.body;
+    const { nome, dataNascita, tipo, zona, studente, privacy, pagamento } = req.body;
+
+    // 2. Validazione Radio Button
+    const metodiValidi = ['carta', 'paypal', 'bonifico'];
+    if (!metodiValidi.includes(pagamento)) {
+        return res.render('index', { 
+            errore: "metodo pagamento non valido", 
+        });
+    }
+
+    // Validazione
+    if (!privacy) {
+        return res.render('index', { 
+            errore: "consenso privacy mancante.", 
+        });
+    }
 
     // Validazione
     const nomeRegex = /^[A-Za-zÀ-ÿ ]{2,}$/;
-    if (!nomeRegex.test(nome) || !dataNascita || !privacy) {
-        return res.status(400).send("Dati non validi o consenso privacy mancante.");
+    if (!nomeRegex.test(nome) || !dataNascita) {
+        return res.status(400).render('errore', { 
+            messaggio: "Dati non validi" 
+        });
     }
 
     // Calcolo Prezzo
@@ -46,6 +63,7 @@ app.post('/sottoscrivi', (req, res) => {
         tipo,
         zona,
         studente: !!studente,
+        pagamento,
         prezzo: prezzo.toFixed(2),
         dataCreazione: new Date().toISOString()
     };
